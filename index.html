@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset=UTF-8 />
+    <link rel="stylesheet" type="text/css" href="styles.css" />
+    <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet"> 
+  </head>
+  <body>
+    <div class="text-box">
+      <div class="heading">To infinity and Beyond</div>
+      <div class="button-wrapper">
+          <div class="button">Learn More</div>
+          <div class="button">Contact Us</div>
+      </div>
+    </div>
+
+    <script src="three.min.js"></script>
+    <script>
+    let scene, camera, renderer, stars, starGeo;
+
+    function init() {
+
+      scene = new THREE.Scene();
+
+      camera = new THREE.PerspectiveCamera(60,window.innerWidth / window.innerHeight, 1, 1000);
+      camera.position.z = 1;
+      camera.rotation.x = Math.PI/2;
+
+      renderer = new THREE.WebGLRenderer();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      document.body.appendChild(renderer.domElement);
+
+      starGeo = new THREE.Geometry();
+      for(let i=0;i<6000;i++) {
+        star = new THREE.Vector3(
+          Math.random() * 600 - 300,
+          Math.random() * 600 - 300,
+          Math.random() * 600 - 300
+        );
+        star.velocity = 0;
+        star.acceleration = 0.02;
+        starGeo.vertices.push(star);
+      }
+
+      let sprite = new THREE.TextureLoader().load( 'star.png' );
+      let starMaterial = new THREE.PointsMaterial({
+        color: 0xaaaaaa,
+        size: 0.7,
+        map: sprite
+      });
+
+      stars = new THREE.Points(starGeo,starMaterial);
+      scene.add(stars);
+
+      window.addEventListener("resize", onWindowResize, false);
+
+      animate(); 
+    }
+    function onWindowResize() {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+      }
+    function animate() {
+      starGeo.vertices.forEach(p => {
+        p.velocity += p.acceleration
+        p.y -= p.velocity;
+        
+        if (p.y < -200) {
+          p.y = 200;
+          p.velocity = 0;
+        }
+      });
+      starGeo.verticesNeedUpdate = true;
+      stars.rotation.y +=0.002;
+    
+      renderer.render(scene, camera);
+      requestAnimationFrame(animate);
+    }
+    init();
+    
+    </script>
+  </body>
+</html>
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>M2000</title>
+	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+	<link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900" rel="stylesheet">
+    <link rel="stylesheet" href="libs/font-awesome/css/font-awesome.min.css">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/styles.css" rel="stylesheet">
+</head>
+
+<body>
+    <div id="mobile-menu-open" class="shadow-large">
+        <i class="fa fa-bars" aria-hidden="true"></i>
+    </div>
+    <!-- End #mobile-menu-toggle -->
+    <header>
+        <div id="mobile-menu-close">
+            <span>Close</span> <i class="fa fa-times" aria-hidden="true"></i>
+        </div>
+        <ul id="menu" class="shadow">
+            <li>
+                <a href="#about">About</a>
+            </li>
+            <li>
+                <a href="#experience">Experience</a>
+            </li>
+            <li>
+                <a href="#education">Education</a>
+            </li>
+            <li>
+                <a href="#projects">Projects</a>
+            </li>
+            <li>
+                <a href="#skills">Skills</a>
+            </li>
+            <li>
+                <a href="#contact">Contact</a>
+            </li>
+        </ul>
+    </header>
+    <!-- End header -->
+
+    <div id="lead">
+        <div id="lead-content">
+            <h1>MOHAMMED SARFARAZ</h1>
+            <h2>Software Engineer</h2>
+            <a href="#" class="btn-rounded-white">Download Resume</a>
+        </div>
+        <!-- End #lead-content -->
+
+        <div id="lead-overlay"></div>
+
+        <div id="lead-down">
+            <span>
+                <i class="fa fa-chevron-down" aria-hidden="true"></i>
+            </span>
+        </div>
+        <!-- End #lead-down -->
+    </div>
+    <!-- End #lead -->
+
+    <div id="about">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h2 class="heading">About Me</h2>
+                </div>
+                <div class="col-md-8">
+                    <p>
+                        Residing in Great Bangalore, Computer Engineer with an interest in Cloud Platform Such as cloud Security ,Soc Analyst, Threat detection And Response , Ethical Hacking and more , an interest in Cyber Security. I'm currently studying to get my degree, but I love to explore the field while I can.
+                         a cyber security enthusiast and enterprising student. I'd love to know more about cyber security. I am on the journey to build my career in this field.  designing and implementation of secure network solutions  to defend against hackers, cyberattacks, and other persistent threats.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End #about -->
+
+    <div id="experience" class="background-alt">
+        <h2 class="heading">Experience</h2>
+        <div id="experience-timeline">
+            <div data-date="September 2021 ">
+                <h3>INTERNSHALA</h3>
+                <h4>Ethical Hacker Intern</h4>
+                <p>
+                    Developed a detailed developer report on the e-commerce website that shows vulnerabilities,  Deep Dive Into The Information Gathering and Basics of Web Development, Web VAPT, OWASP and SQL Injections And  Client Side Attacks.
+                </p>
+            </div>
+
+            <div data-date="January 2022 ">
+                <h3>THE SPARKS FOUNDATION</h3>
+                <h4>Web Development & Designing Intern</h4>
+                <p>
+                    Developing dynamic websites with various specifications Work on features such as payment gateway and social media integration,Deploying and maintaining websites on hosted networks and Amazon Cloud platform,Perform various testing methodologies,Work on skills such as PHP, MySQL, Java, intelligence, analytics etc. 
+
+                </p>
+            </div>
+
+            <div data-date="February 2022">
+                <h3>Tata consultancy services</h3>
+                <h4>Static Application Security Testing Intern</h4>
+                <p>
+                    Defects in Insecure Web-based Applications • Worked on Finding Vulnerabilities in Web App - Using SonarQube, manual testing resources • Resolving any software defects, developing test plans and test cases, improved performance in the insecure websites by making them highly secure, validating software to be bug free.
+                </p>
+
+            </div>
+            <div data-date="March 2022">
+                <h3>Microsoft Azure</h3>
+                <h4>Cloud Computing intern</h4>
+                <p>
+                    Developed an efficient website to upload database for clients and to ensure great level of security • Ensured ease working of the servers and to maintain confidential systems up and running.
+                </p>
+            </div>
+                <div data-date="March 2022">
+                    <h3>SISTMR AUSTRALIA WITH VPKIBIET BARAMARTI INDIA</h3>
+                    <h4>Cyber Security Intern</h4>
+                    <p>
+                        Website That Showed Vulnerabilities and Carried out An vulnerability Assessement routine And Threat Finding Develeping Test Plans ,Test Cases and Ensured Improved performance.
+                    
+                    </p>
+                </div>
+                <div data-date="August 2022">
+                    <h3>Google Cloud Platform Facilitator</h3>
+                    <h4>Associate Cloud Engineer </h4>
+                    <p>
+                        professional network using Google Cloud-hosted quest & skill badges introduce you to Computing, Application Development, Big Data & Machine Learning using Google Cloud's training platform.
+                    </p>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End #experience -->
+
+    <div id="education">
+        <h2 class="heading">Education</h2>
+        <div class="education-block">
+            <h3>Visvesvaraya Technological University</h3>
+            <span class="education-date">Sept 2018 - August 2022</span>
+            <h4>Bachelor of Engineering in Computer Science</h4>
+            <p>
+                CGPA:8
+            </p>
+        </div>
+        <!-- End .education-block -->
+
+        
+    <!-- End #education -->
+
+    <div id="projects" class="background-alt">
+        <h2 class="heading">Projects</h2>
+        <div class="container">
+            <div class="row">
+                <div class="project shadow-large">
+                    <div class="project-image">
+                        <img src="images/project.jpg" />
+                    </div>
+                    <!-- End .project-image -->
+                    <div class="project-info">
+                        <h3>Microsoft azure cloud platform</h3>
+                        <p>
+                            Matrimonial Website Using PHP ,Used the Web Framework to Implement the Portal, Added Features adding Features Last Minute Items on The List, Hosted the Application on Microsoft Azure Cloud Instance.
+                        </p>
+                        <a href="#">View Project</a>
+                    </div>
+                    <!-- End .project-info -->
+                </div>
+                <!-- End .project -->
+
+                <div class="project shadow-large">
+                    <div class="project-image">
+                        <img src="images/project.jpg" />
+                    </div>
+                    <!-- End .project-image -->
+                    <div class="project-info">
+                        <h3>Unity development platform</h3>
+                        <p>
+                            Augmented Reality Based on Indoor Navigation System (Self-learning Project) ,Developed A Working Application That’s Navigates Through Indoor Structures, Tools/Technologies used: AR kit, Visual Studio.
+                        </p>
+                        <a href="#">View Project</a>
+                    </div>
+                    <!-- End .project-info -->
+                </div>
+                <!-- End .project -->
+            </div>
+        </div>
+    </div>
+    <!-- End #projects -->
+
+    <div id="skills">
+        <h2 class="heading">Skills</h2>
+        <ul>
+            <li>Security</li>
+            <li>Python</li>
+            <li>Java</li>
+            <li>Wireshark</li>
+            <li>AWS</li>
+            <li>Google Cloud Platform</li>
+            <li>Network security</li>
+            <li>MySql</li>
+            <li>TCP</li>
+            <li>C</li>
+            <li>AI-Ml</li>
+            <li>Git</li>
+            <li>SonarQube</li>
+            <li>OWASP 10</li>
+            <li>Operating Systems</li>
+            <li>Vs code</li>
+            <li>Blockchain</li>
+            <li>cryptography</li>
+            <li>software testing</li>
+            <li>technical</li>
+            <li>Troubleshoot</li>
+            <li>Java</li>
+            <li>C</li>
+            <li>C#</li>
+            <li>hardware</li>
+            <li>kubernetes</li>
+        </ul>
+    </div>
+    <!-- End #skills -->
+
+    <div id="contact">
+        <h2>Get in Touch</h2>
+        <div id="contact-form">
+            <form method="POST" action="">
+                <input type="hidden" name="_subject" value="Contact request from personal website" />
+                <input type="email" name="_replyto" placeholder="Your email" required>
+                <textarea name="message" placeholder="Your message" required></textarea>
+                <button type="submit">Send</button>
+            </form>
+        </div>
+        <!-- End #contact-form -->
+    </div>
+    <!-- End #contact -->
+
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-5 copyright">
+                    <p>
+                        Mail &copy; <span id="current-year">2022</span> [m.sarfarazslash@gmail.com]
+                    </p>
+                </div>
+                <div class="col-sm-2 top">
+                    <span id="to-top">
+                        <i class="fa fa-chevron-up" aria-hidden="true"></i>
+                    </span>
+                
+            </div>
+        </div>
+    </footer>
+    <!-- End footer -->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="js/scripts.min.js"></script>
+</body>
+
+</html>
